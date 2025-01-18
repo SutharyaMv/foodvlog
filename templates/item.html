@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ pr.name }}</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        .about-section {
+            padding: 50px 0;
+        }
+        .section-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+        .product-details {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .product-image {
+            flex: 1;
+        }
+        .product-info {
+            flex: 2;
+            color: white;
+            text-align: left;
+            margin-right: 20px;
+        }
+        .product-info h2 { 
+            margin-bottom: 20px;
+            font-weight: bold; 
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+            line-height: 1.2; 
+            text-transform: uppercase;
+        }
+        .product-info p {
+            margin-top: 10px;
+            
+        }
+        .btn-primary {
+            background-color: #cf1030;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn-primary:hover {
+            background-color: #0a8024;
+        }
+    </style>
+</head>
+<body>
+    <section class="about-section section-padding" id="section_2">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center product-details">
+                <div class="product-image">
+                    <img src="{{ pr.img.url }}" alt="{{ pr.name }}" style="height:350px; width: 400px; object-fit: cover; border-radius: 10px;">
+                </div>
+                <div class="product-info">
+                    <h2>{{ pr.name }}</h2>
+                    <p>{{ pr.desc }}</p>
+                    <p>Price: ${{ pr.price }}</p>
+                    
+                    <!-- Add the form to submit the product ID to the add_cart view -->
+             <form method="POST" action="{% url 'addcart' pr.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+             </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+</body>
+</html>

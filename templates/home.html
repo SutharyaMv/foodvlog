@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+.category {
+            padding: 0;
+            margin-top:  5px;
+            
+           
+        }
+        .filters_menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 0 0; /* Adjust top margin here (example: 20px) */
+
+            display: flex;
+            gap: 0; /* Space between menu items */
+        }
+        .filters_menu li {
+            display: inline;
+        }
+        .filters_menu a {
+            display: inline-block;
+            padding: 6px 20px;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            color: #ffffff; /* Default font color */
+            background-color: #0e0f0f; /* Default background color */
+            transition: background-color 0.5s ease, color 0.5s ease, transform 0.3s ease;
+        }
+        .filters_menu a:hover {
+            background-color: #1e1f1f; /* Change to your desired hover background color */
+            /* Change to your desired hover font color */
+            transform: scale(1.05); /* Optional: slight zoom effect on hover */
+        }
+
+  </style>
+</head>
+<body>
+  <section class="slider_section ">
+    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Fast Food Restaurant
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, 
+                      commodi, temporibus sapiente ad mollitia laborum 
+                      quam quisquam esse error unde. Tempora ex doloremque,
+                       labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <div class="carousel-item ">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Fast Food Restaurant
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, 
+                      commodi, temporibus sapiente ad mollitia laborum 
+                      quam quisquam esse error unde. Tempora ex doloremque, 
+                      labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Fast Food Restaurant
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+       
+        
+        </div>
+    
+
+    </section> 
+    <!-- end slider section -->
+  </div>
+  <!-- offer section -->
+
+  
+
+  <section class="food_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Our Menu
+        </h2>
+    
+     <div class="category">
+      <ul class="filters_menu">
+        <li><a href="/">All</a></li>
+        
+        {% for i in ct %}
+            <li>
+                <a href="{{ i.get_url }}">{{ i.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+    </div>
+        
+      <div class="filters-content">
+        <div class="row grid" style="display: flex; flex-wrap: wrap;">
+          {% for i in pr %}
+            <div class="col-sm-6 col-lg-4" style="flex: 1 1 33.33%;">
+              <div class="box">
+                <div>
+                  <div class="img-box">
+                    <a class="imgover" href="{{i.get_url}}">
+                   <img src="{{ i.img.url }}" alt="" style="height: 180px; width: 180px; object-fit: cover;"></a>
+                  </div>
+                  <div class="detail-box">
+                    <h6 class="heading">{{ i.name }}</h6>
+                    
+                      <p>{{ i.desc }}</p>
+                      <div class="options">
+                      <br>
+                      <p> Stock left:{{ i.stock }}</p>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="pagination" style="display: flex; justify-content: flex-end; margin-top: 20px;">
+        {% if pr.has_previous %}
+          <a href="?page=1" class="btn btn-light btn-sm">First</a>
+          <a href="?page={{ pr.previous_page_number }}" class="btn btn-light btn-sm">Previous</a>
+        {% endif %}
+        
+        {% for pg in pr.paginator.page_range %}
+          <a href="?page={{ pg }}" class="btn btn-light btn-sm {% if pr.number == pg %} activate {% endif %}">
+            {{ pg }}
+          </a>
+        {% endfor %}
+        
+        {% if pr.has_next %}
+          <a href="?page={{ pr.next_page_number }}" class="btn btn-light btn-sm">Next</a>
+          <a href="?page={{ pr.paginator.num_pages }}" class="btn btn-light btn-sm">Last</a>
+        {% endif %}
+      </div>
+    </div>
+    </section>
+   
+    
+{% endblock %}
+
+</body>
+
+</html>

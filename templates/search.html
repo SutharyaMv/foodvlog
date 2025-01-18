@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+      /* Set the background color to black */
+      .hero_area {
+          background: black !important; /* Set a black background color */
+          height: auto; /* Ensures the area has height */
+      }
+
+      /* Ensure the bg-box does not display */
+      .hero_area .bg-box {
+          display: none; /* Hide the background image container */
+      }
+
+      .category {
+          padding: 0;
+          margin-top: 5px;
+      }
+
+      .filters_menu {
+          list-style-type: none;
+          padding: 0;
+          margin: 10px 0 0 0; /* Adjust top margin here (example: 20px) */
+          display: flex;
+          gap: 0; /* Space between menu items */
+      }
+
+      .filters_menu li {
+          display: inline;
+      }
+
+      .filters_menu a {
+          display: inline-block;
+          padding: 6px 20px;
+          font-size: 18px;
+          text-align: center;
+          text-decoration: none;
+          border-radius: 30px;
+          color: #ffffff; /* Default font color */
+          background-color: #0e0f0f; /* Default background color */
+          transition: background-color 0.5s ease, color 0.5s ease, transform 0.3s ease;
+      }
+
+      .filters_menu a:hover {
+          background-color: #1e1f1f; /* Change to your desired hover background color */
+          transform: scale(1.05); /* Optional: slight zoom effect on hover */
+      }
+  </style>
+</head>
+<body>
+  <section class="slider_section ">
+    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+    <!-- end slider section -->
+
+    <!-- offer section -->
+
+    <section class="food_section layout_padding-bottom">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <div class="category">
+            <ul class="filters_menu">
+              {% for i in ct %}
+                <li>
+                    <a href="{{ i.get_url }}">{{ i.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+          
+        <div class="filters-content">
+          <div class="row grid" style="display: flex; flex-wrap: wrap;">
+            {% for i in pr %}
+              <div class="col-sm-6 col-lg-4" style="flex: 1 1 33.33%;">
+                <div class="box">
+                  <div>
+                    <div class="img-box">
+                      <a class="imgover" href="{{i.get_url}}">
+                      <img src="{{ i.img.url }}" alt="" style="height: 180px; width: 180px; object-fit: cover;"></a>
+                    </div>
+                    <div class="detail-box">
+                      <h6 class="heading">{{ i.name }}</h6>
+                      <p>{{ i.desc }}</p>
+                      <div class="options">
+                      <br>
+                      <p> Stock left:{{ i.stock }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        
+{% endblock %}
+
+</body>
+</html>

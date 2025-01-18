@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="hero_area" style="background-color: white;">
+    <section class="cart-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">Your Cart</h2>
+            {% if ci %}
+            <div class="cart-items">
+
+                <!-- Cart Table -->
+                <div>
+                    <table class="table" style="border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in ci %}
+                            <tr>
+                                <td>
+                                    <form action="{% url 'remove' i.prodt.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger" style="background-color: #e3000b; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+                                            Remove
+                                        </button>
+                                    </form>
+                                    <a href="{{ i.prodt.get_url }}">
+                                        <img src="{{ i.prodt.img.url }}" alt="{{ i.prodt.name }}" style="width: 80px; height: 80px;">
+                                    </a>
+                                    <p>{{ i.prodt.name }}</p>
+                                </td>
+                                <td>${{ i.prodt.price }}</td>
+                                <td>{{ i.quan }}</td>
+                                <td>
+                                    <button type="submit" name="action" value="minus" class="btn btn-secondary"
+                                        style="background-color: white; color: black; border: 1px solid black;">
+                                        <a href="{% url 'cart_decrement' i.prodt.id %}" style="color: black; text-decoration: none;">-</a>
+                                    </button>
+                                    <input type="text" value="{{ i.quan }}" disabled style="width: 40px; text-align: center;">
+                                    <button type="submit" name="action" value="plus" class="btn btn-secondary"
+                                        style="background-color: white; color: black; border: 1px solid black;">
+                                        <a href="{% url 'addcart' i.prodt.id %}" style="color: black; text-decoration: none;">+</a>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                             <tr>
+                                <td colspan="4" style="text-align: left; margin-top: 50px; background-color: #dbd2d2; padding: 10px; margin: 0 auto;">
+                                    <div>
+                                    <p style="font-size: 16px; margin: 5px 0;"><strong>Summary</strong></p>
+                                    <p style="font-size: 16px; margin: 5px 0;"><strong>Total Items:</strong> {{ cn }}</p>
+                                    <p style="font-size: 16px; margin: 5px 0;"><strong>Total Price:</strong> ${{ t }}</p>
+                                </td>
+                                </div>
+                            
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+              
+            {% else %}
+                <p>Your cart is empty.</p>
+            {% endif %}
+        </div>
+    </section>
+</div>
+
+{% endblock %}
