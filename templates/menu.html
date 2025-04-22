@@ -1,49 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="hero_area" style="background-color: white;">
-  
-    <!-- header section starts -->
-    
-     
-    
-    <!-- food section -->
-    <section class="food_section layout_padding">
-      <div class="container">
-        <div class="heading_container heading_center">
-          <h2>
-            Our Menu
-          </h2>
-      
-        
-      
-        <!-- Product Listing -->
-        <div class="filters-content">
-          <div class="row grid" style="display: flex; flex-wrap: wrap;">
-            {% for i in pr %}
-              <div class="col-sm-6 col-lg-4" style="flex: 1 1 33.33%;">
-                <div class="box">
-                  <div>
-                    <div class="img-box">
-                      <a class="imgover" href="{{ i.get_url }}">
-                        <img src="{{ i.img.url }}" alt="{{ i.name }}" style="height: 180px; width: 180px; object-fit: cover;">
-                      </a>
-                    </div>
-                    <div class="detail-box">
-                      <h6 class="heading">{{ i.name }}</h6>
-                      <p>{{ i.desc }}</p>
-                      <div class="options">
-                        <br>
-                        <p>Stock left: {{ i.stock }}</p>
-                      </div>
-                    </div>
+<section class="food_section layout_padding" style="background-color: white;">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2 style="color: white;">
+        Our Menu
+      </h2>
+      </div>
+
+    <div class="filters-content">
+      <div class="row grid">
+        {% for i in pr %}
+          <div class="col-sm-6 col-lg-4">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <a class="imgover" href="{{ i.get_url }}">
+                    <img src="{{ i.img.url }}" alt="{{ i.name }}" style="height: 180px; width: 180px; object-fit: cover;">
+                  </a>
+                </div>
+                <div class="detail-box">
+                  <h6 class="heading">{{ i.name }}</h6>
+                  <p>{{ i.desc }}</p>
+                  <div class="options">
+                    <p>Stock left: {{ i.stock }}</p>
                   </div>
                 </div>
               </div>
-            {% endfor %}
+            </div>
           </div>
+        {% endfor %}
       </div>
-    </section>
-</div>
-  
+    </div>
+  </div>
+</section>
 {% endblock %}
