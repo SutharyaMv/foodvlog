@@ -1,100 +1,51 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <style>
-.search-container button:hover {
-  background: #ccc;
- } 
-  </style>
- 
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link rel="shortcut icon" href="{% static 'hm/images/favicon.png' %}" type="">
-
-  <title> SHOPIO</title>
-
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="{% static 'hm/css/bootstrap.css ' %}" />
-
-  <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-  <!-- nice select  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
-  <!-- font awesome style -->
-  <link href="{% static 'hm/css/font-awesome.min.css' %}" rel="stylesheet" />
-
-  <!-- Custom styles for this template -->
-  <link href="{% static 'hm/css/style.css' %}" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="{% static 'hm/css/responsive.css' %}" rel="stylesheet" />
-
+    <meta charset="UTF-8">
+    <title>SHOPIO</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-
 <body>
 
-  <div class="hero_area">
-    <div class="bg-box">
-      <img src="{% static 'hm/images/bg.jpg' %}" alt="">
-    </div>
-
-    <!---------header------->
-<header class="header_section">
-      <div class="container">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              SHOPIO
-            </span>
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  mx-auto ">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'MenuDetails' %}">Menu</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'cartDetails' %}">Cart</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </a>
-              </li>
-             
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">SHOPIO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
             </ul>
-            <div class="user_option">
-             
-  
-              <div class="search-container">
-                <form action="{% url 'search' %}" method="get">
-                  <input type="text" placeholder="Search.." name='q'>
-                  <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
-              </div> 
-             
-              
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
+            <form class="d-flex" method="get" action="{% url 'searching' %}">
+                <input class="form-control me-2" type="search" placeholder="Search..." name="q" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container mt-4">
     {% block content %}
     {% endblock %}
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

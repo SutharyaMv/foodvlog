@@ -8,5 +8,5 @@ urlpatterns = [
     path('<slug:c_slug>/<slug:product_slug>', views.prodDetails, name='details'),
     path('<slug:c_slug>/', views.home, name='prod_cat'),  # Keep this for category filtering
     path('search', views.searching, name='search'),
-    # other URL patterns
+    
 ]
