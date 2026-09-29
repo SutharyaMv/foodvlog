@@ -23,16 +23,17 @@
                     <a class="nav-link active" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+                   
+                    <a class="nav-link" href="{% url 'MenuDetails' %}">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+                   <a class="nav-link" href="{% url 'cartDetails' %}">Cart</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
             </ul>
-            <form class="d-flex" method="get" action="{% url 'searching' %}">
+                <form class="d-flex" method="get" action="{% url 'search' %}"></form>
                 <input class="form-control me-2" type="search" placeholder="Search..." name="q" aria-label="Search">
                 <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
